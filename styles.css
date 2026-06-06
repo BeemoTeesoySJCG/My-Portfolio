@@ -11,6 +11,8 @@
     --text-color: #2c3e50;
     --light-bg: #ecf0f1;
     --white: #ffffff;
+    --background-start: #f5f8fc;
+    --background-end: #dfe8f4;
     --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
@@ -19,8 +21,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--white);
+    background-image: url('background.jpg');
+    background-color: var(--background-start);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
 }
+
 
 .container {
     max-width: 1200px;
@@ -69,13 +77,28 @@ body {
 
 /* Hero Section */
 .hero {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white);
     padding: 6rem 0;
     text-align: center;
 }
 
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18), transparent 18%),
+                radial-gradient(circle at 80% 75%, rgba(255, 255, 255, 0.12), transparent 16%);
+    opacity: 0.85;
+    pointer-events: none;
+    animation: float 15s ease-in-out infinite;
+}
+
 .hero-content h1 {
+    position: relative;
+    z-index: 1;
     font-size: 3.5rem;
     margin-bottom: 1rem;
     animation: slideInDown 0.8s ease;
@@ -161,6 +184,40 @@ section h2 {
     margin: 0 auto;
     text-align: center;
     color: #555;
+}
+
+.cover-letter {
+    background-color: var(--white);
+}
+
+.cover-letter-content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fafbff;
+    border: 1px solid rgba(52, 152, 219, 0.18);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(46, 61, 73, 0.08);
+    color: #333;
+    line-height: 1.85;
+}
+
+.cover-letter-content p {
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+}
+
+.cover-letter-content p:last-child {
+    margin-bottom: 0;
+}
+
+.cover-letter-content p strong,
+.cover-letter-content p em {
+    color: var(--primary-color);
+}
+
+.cover-letter-content br {
+    content: "";
 }
 
 /* Skills Section */
@@ -376,6 +433,18 @@ section h2 {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    from {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-18px) scale(1.02);
+    }
+    to {
+        transform: translateY(0) scale(1);
     }
 }
 
